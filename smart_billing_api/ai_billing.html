@@ -1,0 +1,579 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Billing Frontend</title>
+  <link rel="preload" href="style.css" as="style">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════ -->
+<nav class="navbar">
+  <a class="navbar-brand" href="#">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="3" width="20" height="18" rx="2"/>
+      <line x1="2" y1="9" x2="22" y2="9"/>
+      <line x1="8" y1="3" x2="8" y2="9"/>
+    </svg>
+    <span>AI Billing</span>
+  </a>
+
+  <div class="nav-tabs">
+    <div class="nav-tab" data-page="login">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+        <polyline points="10 17 15 12 10 7"/>
+        <line x1="15" y1="12" x2="3" y2="12"/>
+      </svg>
+      <span>Login</span>
+    </div>
+    <div class="nav-tab" data-page="register">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M19 8v6m3-3h-6"/>
+      </svg>
+      <span>Signup</span>
+    </div>
+    <div class="nav-tab software-tab active" data-page="billing">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+        <polyline points="14 2 14 8 20 8"/>
+        <line x1="16" y1="13" x2="8" y2="13"/>
+        <line x1="16" y1="17" x2="8" y2="17"/>
+      </svg>
+      <span>Billing</span>
+    </div>
+    <div class="nav-tab software-tab" data-page="products" style="display: none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13"/>
+        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+        <circle cx="5.5" cy="18.5" r="2.5"/>
+        <circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+      <span>Products</span>
+    </div>
+    <div class="nav-tab software-tab" data-page="history" style="display: none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+      <span>History</span>
+    </div>
+    <div class="nav-tab software-tab" data-page="reports" style="display: none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="20" x2="18" y2="10"/>
+        <line x1="12" y1="20" x2="12" y2="4"/>
+        <line x1="6"  y1="20" x2="6"  y2="14"/>
+      </svg>
+      <span>Reports</span>
+    </div>
+    <div class="nav-tab software-tab" data-page="settings" style="display: none;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+      <span>Settings</span>
+    </div>
+  </div>
+
+  <div class="navbar-right">
+    <div class="status-badge" id="statusBadge">Ready</div>
+    <div class="avatar" id="userAvatar" style="display: none;">AB</div>
+    <button class="btn-outline" id="logoutBtn" style="display: none; padding: 6px 12px; font-size: 12px;">Logout</button>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: BILLING
+═══════════════════════════════════════════ -->
+<div id="page-billing" class="page active">
+  <div class="page-header">
+    <div>
+      <div class="page-title">AI Billing</div>
+      <div class="page-sub">Create bill in your style.</div>
+    </div>
+  </div>
+
+  <div class="grid-2-1">
+    <!-- Left column -->
+    <div class="stack">
+      <div class="card">
+        <h2 class="section-title">AI Quick Entry</h2>
+        <div class="field">
+          <label for="billText">Bill text</label>
+          <textarea id="billText" placeholder="Example: 2 sugar, 1 milk, 3 tea"></textarea>
+        </div>
+        <div class="row" style="margin-top:12px;">
+          <button class="btn-primary"   id="generateBtn">Generate AI Bill</button>
+          <button class="btn-secondary" id="parseBtn">Parse Only</button>
+          <button class="btn-secondary" id="clearBtn">Clear</button>
+        </div>
+        <div class="hint">Examples: <span class="pill">2 sugar, 1 milk</span> <span class="pill">1 shugar, 2 tea</span> <span class="pill">3 chai, 5 biscuit</span></div>
+      </div>
+
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h2 class="section-title" style="margin:0;">Billing Grid</h2>
+          <span style="font-size:12px; color:var(--muted); background:#f3f4f6; padding:4px 10px; border-radius:999px;" id="itemCountBadge">0 items</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:28%">Item Name</th>
+                <th style="width:10%">Qty</th>
+                <th style="width:15%">Price (₹)</th>
+                <th style="width:12%">GST %</th>
+                <th style="width:17%">Line Total</th>
+                <th style="width:10%">Action</th>
+              </tr>
+            </thead>
+            <tbody id="billTableBody"></tbody>
+          </table>
+        </div>
+        <div class="row" style="margin-top:12px;">
+          <button class="btn-success" id="saveManualBtn">💾 Save Bill</button>
+          <button class="btn-warn"    id="addRowBtn">➕ Add Row</button>
+          <button class="btn-secondary" id="addMultipleRowsBtn">Add 10 Rows</button>
+          <button class="btn-outline" id="clearAllBtn">Clear All</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row" style="margin-bottom:14px; justify-content:space-between;">
+          <h2 class="section-title" style="margin:0;">Recent Bills History</h2>
+          <button class="btn-outline" id="refreshBillingHistoryBtn" style="padding:6px 12px; font-size:12px;">Refresh</button>
+        </div>
+        <div class="history-table-wrap">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Bill ID</th>
+                <th>Date / Time</th>
+                <th>Products</th>
+                <th>Total (₹)</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="billingHistoryTableBody">
+              <tr>
+                <td colspan="6" style="text-align:center; color:var(--muted); padding:20px; font-size:13px;">
+                  Click "Refresh" to load recent bills...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column -->
+    <div class="stack">
+      <div class="card">
+        <h2 class="section-title">Bill Summary</h2>
+        <div class="bill-summary">
+          <div class="summary-row">
+            <span>Total Items:</span>
+            <strong id="itemsCount">0</strong>
+          </div>
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <strong id="subtotal">₹0.00</strong>
+          </div>
+          <div class="summary-row" style="border-top:1px solid var(--border); padding-top:10px; margin-top:10px;">
+            <span>Total GST:</span>
+            <strong id="totalGst">₹0.00</strong>
+          </div>
+          <div class="summary-row highlight">
+            <span>Grand Total:</span>
+            <strong id="grandTotal">₹0.00</strong>
+          </div>
+          <div style="font-size:12px; color:var(--muted); margin-top:8px;">Bill ID: <strong id="billId">—</strong></div>
+        </div>
+        
+        <div class="items-list-summary" id="itemsListSummary">
+          <div style="font-size:12px; font-weight:600; color:var(--muted); margin-bottom:8px; margin-top:12px;">ITEMS:</div>
+          <div id="summaryItemsList" style="font-size:13px; line-height:1.6;">
+            <div style="color:var(--muted);">No items added</div>
+          </div>
+        </div>
+        
+        <div class="row" style="margin-top:16px; gap:8px;">
+          <button class="btn-primary" id="printBillBtn" style="flex:1;">🖨️ Print Bill</button>
+          <button class="btn-outline" id="emailBillBtn" style="flex:1;">📧 Email</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Predict Price</h2>
+        <div class="field">
+          <label for="predictInput">Item name</label>
+          <input id="predictInput" type="text" placeholder="e.g. shugar" />
+        </div>
+        <div class="row" style="margin-top:10px;">
+          <button class="btn-secondary" id="predictPriceBtn">Predict Price</button>
+        </div>
+        <div id="predictResult" class="hint"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Print Template -->
+  <div id="printTemplate" style="display:none;">
+    <div class="print-bill">
+      <div class="print-header">
+        <div class="print-title" id="printBusinessName">AI Billing System</div>
+        <div class="print-time" id="printDateTime"></div>
+      </div>
+      <div class="print-items">
+        <table class="print-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>GST</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody id="printItemsBody">
+          </tbody>
+        </table>
+      </div>
+      <div class="print-summary">
+        <div class="print-line">
+          <span>Subtotal:</span>
+          <span id="printSubtotal">₹0.00</span>
+        </div>
+        <div class="print-line">
+          <span>Total GST:</span>
+          <span id="printTotalGst">₹0.00</span>
+        </div>
+        <div class="print-line total">
+          <span>Grand Total:</span>
+          <span id="printGrandTotal">₹0.00</span>
+        </div>
+      </div>
+      <div class="print-footer">
+        <p>Thank you for your business!</p>
+        <p style="font-size:11px; margin-top:8px;">Bill ID: <span id="printBillId">—</span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: PRODUCTS
+═══════════════════════════════════════════ -->
+<div id="page-products" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Products</div>
+      <div class="page-sub">View and manage your product catalogue from the backend.</div>
+    </div>
+    <div class="row">
+      <button class="btn-primary" id="loadProductsBtn">Load Products</button>
+      <button class="btn-outline" id="refreshProductsBtn">Refresh</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="margin-bottom:14px; justify-content:space-between;">
+      <h2 class="section-title" style="margin:0;">Product List</h2>
+      <input type="text" id="productSearch" placeholder="Search products..." style="max-width:220px;" />
+    </div>
+    <div id="productsList" class="products-list">
+      <div style="padding:20px; text-align:center; color:var(--muted); font-size:13px;">
+        Click "Load Products" to fetch from backend...
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: HISTORY
+═══════════════════════════════════════════ -->
+<div id="page-history" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Bill History</div>
+      <div class="page-sub">Recent bills saved to your FastAPI backend.</div>
+    </div>
+    <button class="btn-primary" id="loadHistoryBtn">Load History</button>
+  </div>
+
+  <div class="card">
+    <div class="history-table-wrap">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Bill ID</th>
+            <th>Date / Time</th>
+            <th>Products</th>
+            <th>Total (₹)</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="historyTableBody">
+          <tr>
+            <td colspan="6" style="text-align:center; color:var(--muted); padding:30px; font-size:13px;">
+              Click "Load History" to fetch bill records from your backend.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: REPORTS
+═══════════════════════════════════════════ -->
+<div id="page-reports" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Reports</div>
+      <div class="page-sub">Sales analytics and billing summaries.</div>
+    </div>
+    <button class="btn-primary" id="loadReportsBtn">Load Reports</button>
+  </div>
+
+  <div class="grid-2-1" style="margin-bottom:18px;">
+    <div class="card" style="display:flex; gap:18px; flex-wrap:wrap;">
+      <div style="flex:1; min-width:120px;">
+        <div style="font-size:12px; color:var(--muted); margin-bottom:4px;">Today's Revenue</div>
+        <div id="todayRevenue" style="font-size:28px; font-weight:700; color:var(--primary);">₹0.00</div>
+      </div>
+      <div style="flex:1; min-width:120px;">
+        <div style="font-size:12px; color:var(--muted); margin-bottom:4px;">Bills This Month</div>
+        <div id="monthBills" style="font-size:28px; font-weight:700;">0</div>
+      </div>
+      <div style="flex:1; min-width:120px;">
+        <div style="font-size:12px; color:var(--muted); margin-bottom:4px;">Avg Bill Value</div>
+        <div id="avgBillValue" style="font-size:28px; font-weight:700;">₹0.00</div>
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-size:12px; color:var(--muted); margin-bottom:4px;">Top Item</div>
+      <div id="topItem" style="font-size:22px; font-weight:700;">—</div>
+    </div>
+  </div>
+
+  <div class="placeholder">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <line x1="18" y1="20" x2="18" y2="10"/>
+      <line x1="12" y1="20" x2="12" y2="4"/>
+      <line x1="6"  y1="20" x2="6"  y2="14"/>
+    </svg>
+    <h3>Charts Coming Soon</h3>
+    <p>Connect your backend to start seeing sales trends and item-wise breakdowns.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE: SETTINGS
+═══════════════════════════════════════════ -->
+<div id="page-settings" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Settings</div>
+      <div class="page-sub">Configure API, billing preferences, and app behaviour.</div>
+    </div>
+  </div>
+
+  <div class="settings-grid">
+    <!-- API Config -->
+    <div class="card">
+      <div class="settings-section-label">API Configuration</div>
+      <div class="field" style="margin-bottom:14px;">
+        <label for="apiBaseInput">Backend URL</label>
+        <input id="apiBaseInput" type="text" value="" placeholder="http://127.0.0.1:8001" />
+        <div style="font-size:11px; color:var(--muted); margin-top:4px;">Auto-detected: <span id="detectedApiUrl"></span></div>
+      </div>
+      <div class="field" style="margin-bottom:14px;">
+        <label for="apiKeyInput">API Key (optional)</label>
+        <input id="apiKeyInput" type="password" placeholder="Bearer token if required" />
+      </div>
+      <div class="field" style="margin-bottom:14px;">
+        <label for="timeoutInput">Request Timeout (ms)</label>
+        <input id="timeoutInput" type="number" value="5000" min="500" step="500" />
+      </div>
+      <div class="row">
+        <button class="btn-primary" id="saveApiBtn">Save API Settings</button>
+        <button class="btn-outline" id="testApiBtn">Test Connection</button>
+      </div>
+      <div id="apiSaveMsg" class="hint" style="margin-top:8px;"></div>
+    </div>
+
+    <!-- Billing Preferences -->
+    <div class="card">
+      <div class="settings-section-label">Billing Preferences</div>
+      <div class="field" style="margin-bottom:14px;">
+        <label for="defaultGstInput">Default GST %</label>
+        <input id="defaultGstInput" type="number" value="18" min="0" max="100" step="0.5" />
+      </div>
+      <div class="field" style="margin-bottom:14px;">
+        <label for="currencyInput">Currency Symbol</label>
+        <input id="currencyInput" type="text" value="₹" style="max-width:80px;" />
+      </div>
+      <div class="field" style="margin-bottom:14px;">
+        <label for="businessName">Business Name</label>
+        <input id="businessName" type="text" placeholder="Your Shop Name" />
+      </div>
+      <button class="btn-primary" id="savePrefBtn">Save Preferences</button>
+      <div id="prefSaveMsg" class="hint" style="margin-top:8px;"></div>
+    </div>
+
+    <!-- Feature Toggles -->
+    <div class="card">
+      <div class="settings-section-label">Feature Toggles</div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">AI Auto-Fill Price</div>
+          <div class="toggle-desc">Automatically fill price from AI prediction</div>
+        </div>
+        <div class="toggle on" data-toggle="autoFill"></div>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Fuzzy Item Matching</div>
+          <div class="toggle-desc">Match typos like "shugar" → "sugar"</div>
+        </div>
+        <div class="toggle on" data-toggle="fuzzy"></div>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Auto-Save Bills</div>
+          <div class="toggle-desc">Save bills to backend after AI generation</div>
+        </div>
+        <div class="toggle" data-toggle="autoSave"></div>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Show GST Breakdown</div>
+          <div class="toggle-desc">Display GST amount separately in summary</div>
+        </div>
+        <div class="toggle" data-toggle="gstBreakdown"></div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="card">
+      <div class="settings-section-label">About</div>
+      <div style="font-size:13px; color:var(--muted); line-height:1.7;">
+        <p><strong style="color:var(--text);">AI Billing Frontend</strong></p>
+        <p style="margin-top:6px;">Version: 1.0.0</p>
+        <p>Backend: FastAPI</p>
+        <p>AI: Claude / LLM-powered parsing</p>
+        <p style="margin-top:12px;">Connect this frontend to your FastAPI backend at <code style="background:#f3f4f6; padding:2px 6px; border-radius:4px; font-size:12px;">http://127.0.0.1:8001</code> to get started.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: LOGIN
+═══════════════════════════════════════════ -->
+<div id="page-login" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Sign In to Your Shop</div>
+      <div class="page-sub">Access your billing system by signing in with your shop credentials.</div>
+    </div>
+  </div>
+
+  <div style="max-width: 400px; margin: 0 auto;">
+    <div class="card">
+      <h2 class="section-title">Sign In</h2>
+      <div class="field">
+        <label for="loginEmail">Email</label>
+        <input id="loginEmail" type="email" placeholder="your@email.com" />
+      </div>
+      <div class="field">
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" placeholder="Enter password" />
+      </div>
+      <div class="row" style="margin-top:16px;">
+        <button class="btn-primary" id="loginBtn">Sign In</button>
+      </div>
+      <div id="loginMsg" class="hint" style="margin-top:12px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAGE: SIGNUP
+═══════════════════════════════════════════ -->
+<div id="page-register" class="page">
+  <div class="page-header">
+    <div>
+      <div class="page-title">Sign Up Your Shop</div>
+      <div class="page-sub">Create a new shop account to start using the AI billing system.</div>
+    </div>
+  </div>
+
+  <div style="max-width: 500px; margin: 0 auto;">
+    <div class="card">
+      <h2 class="section-title">Shop Sign Up</h2>
+      <div class="field">
+        <label for="regShopName">Shop Name</label>
+        <input id="regShopName" type="text" placeholder="My Grocery Store" />
+      </div>
+      <div class="field">
+        <label for="regOwnerName">Full Name</label>
+        <input id="regOwnerName" type="text" placeholder="John Doe" />
+      </div>
+      <div class="field">
+        <label for="regDob">Date of Birth</label>
+        <input id="regDob" type="date" />
+      </div>
+      <div class="field">
+        <label for="regMobile">Mobile</label>
+        <input id="regMobile" type="tel" placeholder="+91 9876543210" />
+      </div>
+      <div class="field">
+        <label for="regEmail">Email</label>
+        <input id="regEmail" type="email" placeholder="owner@shop.com" />
+      </div>
+      <div class="field">
+        <label for="regPassword">Password</label>
+        <input id="regPassword" type="password" placeholder="Create a strong password" />
+      </div>
+      <div class="field">
+        <label for="regBusinessType">Business Type</label>
+        <select id="regBusinessType">
+          <option value="grocery">Grocery Store</option>
+          <option value="restaurant">Restaurant</option>
+          <option value="retail">Retail Shop</option>
+          <option value="pharmacy">Pharmacy</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="row" style="margin-top:16px;">
+        <button class="btn-primary" id="registerBtn">Sign Up</button>
+      </div>
+      <div id="registerMsg" class="hint" style="margin-top:12px;"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════ -->
+<script src="script.js" defer></script>
+</body>
+</html>
