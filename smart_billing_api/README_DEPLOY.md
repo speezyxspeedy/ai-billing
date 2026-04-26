@@ -36,6 +36,11 @@ Open http://localhost:8001
 2. Go to [railway.app](https://railway.app) → **New Project** → **Deploy from GitHub repo**.
 3. Railway auto-detects the `Dockerfile` and deploys.
 
+## Live Demo
+The app is publicly accessible at: **https://billify-cooj.onrender.com**
+
+> Note: On the free Render plan, the instance sleeps after 15 min of inactivity. The first request may take ~30 seconds to wake up.
+
 ## Environment Variables
 | Variable | Default | Description |
 |----------|---------|-------------|
